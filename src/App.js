@@ -1,21 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider as ReduxProvider } from 'react-redux';
+import Header from './common/Header';
+import routes from './routes';
+import { Switch, Route } from 'react-router-dom';
 
-import { Layout } from './common/Layout';
-import createStore from './services/createStore';
-
-const store = createStore(window.__REDUX_STORE__);
-
-function App() {
+const App = () => {
   return (
-    <ReduxProvider store={store}>
-      <Router>
-        <Layout />
-      </Router>
-    </ReduxProvider>
+    <>
+      <Header />
+      <Switch>
+        {routes.map((route, i) => 
+          <Route key={i} {...route} />
+        )}
+      </Switch>
+    </>
   );
 }
 
-export default App;
+export default App; 

@@ -28,13 +28,11 @@ const StarwarsList = () => {
 
   useEffect(() => {
     dispatch(fetchPeople());
-  }, [])
+  }, [dispatch])
   const peopleData = useSelector(state => state.StarwarsList);
-
+  
   return (
-    <>
-      <Table columns={columns} data={peopleData.data} />
-    </>
+    <Table columns={columns} data={peopleData.data} />
   );
 }
 

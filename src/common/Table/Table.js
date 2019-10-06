@@ -11,8 +11,8 @@ const Table = ({ data, columns, isLoading, onMore }) => {
         )}
       </thead>
       <tbody>
-        {data.map(rowData =>
-          <TableRow rowData={rowData} columns={columns} />
+        {data.map((rowData, i) =>
+          <TableRow key={i} rowData={rowData} columns={columns} />
         )}
       </tbody>
     </table>
