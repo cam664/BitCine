@@ -4,7 +4,7 @@ const TableRow = ({ rowData, columns }) => {
   return (
     <tr>
       {columns.map(col =>
-        <td>
+        <td style={{width: col.width}}>
           {rowData[col.field]}
         </td>  
       )}

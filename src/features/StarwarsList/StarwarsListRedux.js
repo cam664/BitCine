@@ -1,4 +1,4 @@
-import { fetchPeopleAPI } from './';
+import { fetchPeopleAPI } from './StarwarsListAPI';
 
 const fetchPeopleActions = {
   REQUEST: 'StarwarsList/fetchPeople/REQUEST',
@@ -35,19 +35,24 @@ export default function reducer(state = initialState, action) {
 }
 
 export function fetchPeople() {
-  return async (dispatch) => {
-    dispatch({ type: fetchPeopleActions.REQUEST });
+  return (dispatch) => {
+    return new Promise(async (resolve, reject) => {
+      dispatch({ type: fetchPeopleActions.REQUEST });
 
-    try {
-      const res = await fetchPeopleAPI();
-      const resJson = await res.json();
+      try {
+        const res = await fetchPeopleAPI();
+        const resJson = await res.json();
 
-      dispatch({ 
-        type: fetchPeopleActions.SUCCESS,
-        payload: resJson
-      });
-    } catch(e) {
-      dispatch({ type: fetchPeopleActions.FAILURE });
-    }
+        dispatch({ 
+          type: fetchPeopleActions.SUCCESS,
+          payload: resJson
+        });
+        resolve();
+
+      } catch(e) {
+        dispatch({ type: fetchPeopleActions.FAILURE });
+        reject();
+      }
+    })
   }
 }
