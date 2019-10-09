@@ -1,11 +1,18 @@
 import React from 'react';
 
-const TableRow = ({ rowData, columns }) => {
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
+import styles from './TableStyles';
+
+const TableRow = ({ rowData, columns, arePlaceholders }) => {
   return (
     <tr>
       {columns.map(col =>
         <td style={{width: col.width}}>
-          {rowData[col.field]}
+          {arePlaceholders  
+            ? <span css={css`${styles.rowPlaceholder}`}>&nbsp;</span> 
+            : rowData[col.field]
+          }
         </td>  
       )}
     </tr>

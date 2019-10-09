@@ -1,58 +1,136 @@
 import { fetchPeopleAPI } from './StarwarsListAPI';
+import { fetchShipsAPI } from './StarwarsListAPI';
 
-const fetchPeopleActions = {
-  REQUEST: 'StarwarsList/fetchPeople/REQUEST',
-  SUCCESS: 'StarwarsList/fetchPeople/SUCCESS',
-  FAILURE: 'StarwarsList/fetchPeople/FAILURE'
+const fetchListActions = {
+  REQUEST: 'StarwarsList/fetchList/REQUEST',
+  SUCCESS: 'StarwarsList/fetchList/SUCCESS',
+  FAILURE: 'StarwarsList/fetchList/FAILURE'
+}
+
+const fetchShipsActions = {
+  REQUEST: 'StarwarsList/fetchShips/REQUEST',
+  SUCCESS: 'StarwarsList/fetchShips/SUCCESS',
+  FAILURE: 'StarwarsList/fetchShips/FAILURE'
 }
 
 const initialState = {
-  status: 'loading',
-  data: []
+  list: {
+    status: 'loading',
+    data: [],
+    next: null,
+    spliceIdx: 7
+  },
+  ships: {
+    status: 'loading',
+    data: [],
+    next: null
+  }
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case fetchPeopleActions.REQUEST:
+    case fetchListActions.REQUEST:
       return {
-        status: 'loading',
-        data: []
+        ...state,
+        list: {
+          ...state.list,
+          status: 'loading',
+          data: [],
+        }
       }
-    case fetchPeopleActions.SUCCESS:
+    case fetchListActions.SUCCESS:
       return {
-        status: 'success',
-        data: action.payload.results,
-        next: action.payload.next
+        ...state,
+        list: {
+          ...state.list,
+          status: 'success',
+          data: action.data,
+          next: action.next,
+          
+        }
       }
-    case fetchPeopleActions.FAILURE:
+    case fetchListActions.FAILURE:
       return {
-        status: 'failure',
-        data: []
+        ...state,
+        list: {
+          ...state.list,
+          status: 'failure',
+          data: [],
+        }
       }
+
+      case fetchShipsActions.REQUEST:
+        return {
+          ...state,
+          ships: {
+            ...state.ships,
+            status: 'loading',
+            data: [],
+            
+          }
+        }
+      case fetchShipsActions.SUCCESS:
+        return {
+          ...state,
+          ships: {
+            ...state.ships,
+            status: 'success',
+            data: action.data,
+            next: action.next,
+            
+          }
+        }
+      case fetchShipsActions.FAILURE:
+        return {
+          ...state,
+          ships: {
+            ...state.ships,
+            status: 'failure',
+            data: [],
+            
+          }
+        }
     default:
       return state;
   }
 }
 
-export function fetchPeople() {
-  return (dispatch) => {
-    return new Promise(async (resolve, reject) => {
-      dispatch({ type: fetchPeopleActions.REQUEST });
+export function fetchList() {
+  return async (dispatch, getState) => {
+    dispatch({ type: fetchListActions.REQUEST });
+    dispatch({ type: fetchShipsActions.REQUEST });
 
-      try {
-        const res = await fetchPeopleAPI();
-        const resJson = await res.json();
+    try {
+      let res = await Promise.all([
+        fetchPeopleAPI().then(res => res.json()), 
+        fetchShipsAPI().then(res => res.json())
+      ]);
+      
+      const currState = getState();
+      const { spliceIdx } = currState.StarwarsList.list;
 
-        dispatch({ 
-          type: fetchPeopleActions.SUCCESS,
-          payload: resJson
-        });
-        resolve();
+      let peopleRes = res[0];
+      let shipsRes = res[1]
+      let listPayload = [...peopleRes.results];
+      let shipsPayload = [...shipsRes.results];
 
-      } catch(e) {
-        dispatch({ type: fetchPeopleActions.FAILURE });
-        reject();
-      }
-    })
+      listPayload.splice(spliceIdx, 0, shipsPayload.shift())
+      const nextSpliceIdx = spliceIdx + 8; 
+      
+      dispatch({ 
+        type: fetchListActions.SUCCESS,
+        data: listPayload,
+        next: peopleRes.next,
+        spliceIdx: nextSpliceIdx
+      });
+      dispatch({
+        type: fetchShipsActions.SUCCESS,
+        data: shipsPayload,
+        next: shipsRes.next
+      });
+    } catch(e) {
+      dispatch({ type: fetchListActions.FAILURE });
+      dispatch({ type: fetchShipsActions.FAILURE });
+    }
   }
 }

@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Table from '../../common/Table';
-import { fetchPeople } from './StarwarsListRedux';
+import { fetchList } from './StarwarsListRedux';
 
 const columns = [
   {
@@ -30,18 +30,24 @@ const columns = [
 const StarwarsList = () => {
   const dispatch = useDispatch();
 
-  const peopleData = useSelector(state => state.StarwarsList);
+  const listData = useSelector(state => state.StarwarsList);
   useEffect(() => {
-    if (peopleData.data.length === 0) {
-      dispatch(fetchPeople());
+    if (listData.list.data.length === 0) {
+      dispatch(fetchList());
     }
   }, [])
   
+  const [isLoading, setLoading] = useState(false);
+  const onMore = () => {
+    setLoading(() => true);
+    // fetch next page here
+  }
+
   return (
-    <Table columns={columns} data={peopleData.data} />
+    <Table columns={columns} data={listData.list.data} onMore={onMore} isLoading={isLoading} />
   );
 }
 
-StarwarsList.serverFetch = fetchPeople;
+StarwarsList.serverFetch = fetchList;
 
 export default StarwarsList;
