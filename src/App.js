@@ -26,6 +26,11 @@ const App = () => {
             font-family: 'Lato', sans-serif;
             box-sizing: border-box;
           }
+          main {
+            padding: 100px 2.5% 90px;
+            max-width: 1680px;
+            margin: 0 auto;
+          }
         `}
       />
       <Header />

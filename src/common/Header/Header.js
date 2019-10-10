@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
@@ -9,7 +9,9 @@ import starWarsLogo from '../../assets/img/logo-star-wars.png';
 const Header = () => {
   return (
     <header css={css`${styles.header}`}>
-      <img src={starWarsLogo} />
+      <Link to='/'>
+        <img src={starWarsLogo} />
+      </Link>
     </header>
   );
 }

@@ -1,9 +1,15 @@
-import { Home } from "./Home";
+import Home from './Home';
+import Character from './Character';
 
 export default [
   {
-    path: "/",
+    path: '/',
     component: Home,
     exact: true,
   },
+  {
+    path: '/character/:characterID',
+    component: Character,
+    exact: false
+  }
 ];

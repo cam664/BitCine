@@ -1,16 +1,14 @@
 import React from 'react';
 import StarwarsList from '../../features/StarwarsList';
 
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core';
-import styles from './HomeStyles';
-
-export const Home = () => {
+const Home = () => {
   return (
-    <main css={css`${styles.main}`}>
+    <main>
       <StarwarsList />
     </main>
   );
 }
+
+export default Home;
 
 

@@ -7,11 +7,17 @@ export default {
         width: 100%;
       }
       th, td {
-        padding: 15px 7.5px;
-        &:first--of-type {
+        div, a {
+          padding: 15px 7.5px;
+        }
+      }
+      tr td, tr th {
+        &:first-of-type div,
+        &:first-of-type a {
           padding-left: 15px;
         }
-        &:last--of-type {
+        &:last-of-type div,
+        &:last-of-type a {
           padding-right: 15px;
         }
       }
@@ -35,5 +41,16 @@ export default {
     border-radius: 6px;
     min-width: 30px;
     background-image: linear-gradient(to top, #f2f3f3, #f6f6f6);
+  `,
+  isClickable: `
+    a {
+      display: block;
+      text-decoration: none;
+      color: #000;
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(187,221,255,0.3);
+    }
   `
 }

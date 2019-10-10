@@ -37,7 +37,7 @@ export default (req, res) => {
       }
 
       // Send a loading spinner immediately while waiting to populate Redux store
-      res.write('<html><img id="loading-spinner" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);" src="/Ripple-1s-110px.gif" /></html>')
+      res.write('<html><img id="loading-spinner" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);" src="/spinner.gif" /></html>')
 
       const store = createStore();
       const context = {};

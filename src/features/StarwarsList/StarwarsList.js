@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Table from '../../common/Table';
-import { fetchList } from './StarwarsListRedux';
+import Spinner from '../../common/Spinner';
+
+import { fetchList, fetchListNext } from './StarwarsListRedux';
 
 const columns = [
   {
@@ -27,24 +29,55 @@ const columns = [
   },
 ]
 
+// should be in a theme provider
+const centerElem = `            
+  position:fixed; 
+  top:50%; 
+  left:50%; 
+  transform:translate(-50%,-50%);
+`;
+
+let canFetchFlag = true;
+
 const StarwarsList = () => {
   const dispatch = useDispatch();
 
+  const [initialLoad, setInitialLoad] = useState(true);
   const listData = useSelector(state => state.StarwarsList);
-  useEffect(() => {
-    if (listData.list.data.length === 0) {
-      dispatch(fetchList());
+  useEffect(() => { 
+    async function fetchData() {
+      if (listData.list.status !== 'success') {
+        await dispatch(fetchList());
+        setInitialLoad(() => false);
+      }
     }
+    fetchData();
   }, [])
   
-  const [isLoading, setLoading] = useState(false);
-  const onMore = () => {
-    setLoading(() => true);
-    // fetch next page here
+  const [listIsLoading, setListLoading] = useState(false);
+  const onMore = async () => {
+    if (canFetchFlag) {
+      canFetchFlag = false;
+      setListLoading(() => true);
+
+      await dispatch(fetchListNext())
+
+      if (listData.list.next) {
+        canFetchFlag = true;
+      }
+      setListLoading(() => false);
+    }
   }
 
   return (
-    <Table columns={columns} data={listData.list.data} onMore={onMore} isLoading={isLoading} />
+    <>
+      {(listData.list.status !== 'success' && initialLoad) 
+      ? (
+        <Spinner />
+      ) : (
+        <Table columns={columns} data={listData.list.data} onMore={onMore} isLoading={listIsLoading} />
+      )}
+    </>
   );
 }
 

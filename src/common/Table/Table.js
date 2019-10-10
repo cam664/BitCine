@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import TableRow from './TableRow';
 
 /** @jsx jsx */
@@ -11,7 +11,7 @@ const Table = ({ data, columns, isLoading, onMore }) => {
 
   const handleScroll = (e) => {
     const scrollPos = e.currentTarget.scrollTop;
-    const scrollEnd = (scrollWrapRef.current.clientHeight - scrollWrapRef.current.scrollHeight) - 50;
+    const scrollEnd = (scrollWrapRef.current.scrollHeight - scrollWrapRef.current.clientHeight);
     if (scrollPos >= scrollEnd) {
       onMore();
     }
@@ -23,7 +23,7 @@ const Table = ({ data, columns, isLoading, onMore }) => {
         <thead>
           <tr>
             {columns.map(col => 
-              <th style={{width: col.width}}>{col.label}</th>
+              <th style={{width: col.width}}><div>{col.label}</div></th>
             )}
           </tr>
         </thead>
@@ -32,8 +32,8 @@ const Table = ({ data, columns, isLoading, onMore }) => {
       <div onScroll={handleScroll} ref={scrollWrapRef} css={css`${styles.tableBodyWrap}`}>
         <table>
           <tbody>
-            {data.map((rowData, i) =>
-              <TableRow key={i} rowData={rowData} columns={columns} />
+            {data.map((rowData, i) => 
+              <TableRow key={i} isClickable={rowData.model ? false : true} rowData={rowData} columns={columns} />
             )}
             {isLoading && 
               <>
