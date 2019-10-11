@@ -23,7 +23,7 @@ const Table = ({ data, columns, isLoading, onMore }) => {
         <thead>
           <tr>
             {columns.map(col => 
-              <th style={{width: col.width}}><div>{col.label}</div></th>
+              <th key={col.label} style={{width: col.width}}><div>{col.label}</div></th>
             )}
           </tr>
         </thead>

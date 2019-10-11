@@ -2,7 +2,7 @@ import {
   fetchPersonAPI
 } from './StarwarsCharacterAPI';
 
-const fetchPersonActions = {
+export const fetchPersonActions = {
   REQUEST: 'StarwarsCharacter/fetchPerson/REQUEST',
   SUCCESS: 'StarwarsCharacter/fetchPerson/SUCCESS',
   FAILURE: 'StarwarsCharacter/fetchPerson/FAILURE'

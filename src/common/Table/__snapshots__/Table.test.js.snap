@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table renders a snapshot 1`] = `
+<section
+  className="css-1rt94nh-Table"
+>
+  <table>
+    <thead>
+      <tr>
+        <th
+          style={
+            Object {
+              "width": "40%",
+            }
+          }
+        >
+          <div>
+            Column 1
+          </div>
+        </th>
+        <th
+          style={
+            Object {
+              "width": "20%",
+            }
+          }
+        >
+          <div>
+            Column 2
+          </div>
+        </th>
+      </tr>
+    </thead>
+  </table>
+  <div
+    className="css-1mzwwa2-Table"
+    onScroll={[Function]}
+  >
+    <table>
+      <tbody>
+        <tr>
+          <td
+            style={
+              Object {
+                "width": "40%",
+              }
+            }
+          >
+            <div>
+              Data Placeholder
+            </div>
+          </td>
+          <td
+            style={
+              Object {
+                "width": "20%",
+              }
+            }
+          >
+            <div>
+              Data Placeholder
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td
+            style={
+              Object {
+                "width": "40%",
+              }
+            }
+          >
+            <div>
+              Data Placeholder
+            </div>
+          </td>
+          <td
+            style={
+              Object {
+                "width": "20%",
+              }
+            }
+          >
+            <div>
+              Data Placeholder
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+`;

@@ -29,26 +29,19 @@ const columns = [
   },
 ]
 
-// should be in a theme provider
-const centerElem = `            
-  position:fixed; 
-  top:50%; 
-  left:50%; 
-  transform:translate(-50%,-50%);
-`;
-
 let canFetchFlag = true;
 
 const StarwarsList = () => {
   const dispatch = useDispatch();
 
-  const [initialLoad, setInitialLoad] = useState(true);
+  const [isLoadingFromClient, setIsLoadingFromClient] = useState(false);
   const listData = useSelector(state => state.StarwarsList);
   useEffect(() => { 
     async function fetchData() {
       if (listData.list.status !== 'success') {
+        setIsLoadingFromClient(() => true);
         await dispatch(fetchList());
-        setInitialLoad(() => false);
+        setIsLoadingFromClient(() => false);
       }
     }
     fetchData();
@@ -58,20 +51,19 @@ const StarwarsList = () => {
   const onMore = async () => {
     if (canFetchFlag) {
       canFetchFlag = false;
+
+      if (!listData.list.next) return;
+
       setListLoading(() => true);
-
       await dispatch(fetchListNext())
-
-      if (listData.list.next) {
-        canFetchFlag = true;
-      }
       setListLoading(() => false);
+      canFetchFlag = true;
     }
   }
 
   return (
     <>
-      {(listData.list.status !== 'success' && initialLoad) 
+      {(listData.list.status !== 'success' && isLoadingFromClient) 
       ? (
         <Spinner />
       ) : (

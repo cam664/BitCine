@@ -5,7 +5,7 @@ import {
   fetchShipsNextAPI 
 } from './StarwarsListAPI';
 
-const fetchListActions = {
+export const fetchListActions = {
   REQUEST: 'StarwarsList/fetchList/REQUEST',
   SUCCESS: 'StarwarsList/fetchList/SUCCESS',
   FAILURE: 'StarwarsList/fetchList/FAILURE'

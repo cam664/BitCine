@@ -1,3 +1,19 @@
+# BitCine Front End Assignment by Cameron Laing
+
+This project contains all the standard requirements and bonus points. I hope you enjoy!
+
+To run in SSR mode:
+
+`npm install`
+
+`npm run build`
+
+`npm run serve`
+
+Server will start on port 3000!
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

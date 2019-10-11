@@ -13,8 +13,8 @@ const TableRow = ({ rowData, columns, arePlaceholders, isClickable }) => {
       const characterID = urlSplit[urlSplit.length - 2];
       return (
         <tr css={css`${styles.isClickable}`}>
-          {columns.map(col =>
-            <td style={{width: col.width}}>
+          {columns.map((col, i) =>
+            <td key={i} style={{width: col.width}}>
               <Link to={`/character/${characterID}`}>
                 {rowData[col.field]}
               </Link>
@@ -25,8 +25,8 @@ const TableRow = ({ rowData, columns, arePlaceholders, isClickable }) => {
     } else if (arePlaceholders) {
       return (
         <tr>
-          {columns.map(col =>
-            <td style={{width: col.width}}>
+          {columns.map((col, i) =>
+            <td key={i} style={{width: col.width}}>
               <div><span css={css`${styles.rowPlaceholder}`}>&nbsp;</span></div>
             </td>
           )}
@@ -35,8 +35,8 @@ const TableRow = ({ rowData, columns, arePlaceholders, isClickable }) => {
     } else {
       return (
         <tr>
-          {columns.map(col =>
-            <td style={{width: col.width}}>
+          {columns.map((col, i) =>
+            <td key={i} style={{width: col.width}}>
               <div>{rowData[col.field]}</div>
             </td>
           )}

@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner renders a snapshot 1`] = `
+<img
+  className="css-14hden7-Spinner"
+  src="spinner.gif"
+/>
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Character Route renders a snapshot 1`] = `
+<main>
+  <img
+    className="css-14hden7-Spinner"
+    src="spinner.gif"
+  />
+</main>
+`;

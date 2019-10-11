@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders a snapshot 1`] = `
+<header
+  className="css-j2ge83-Header"
+>
+  <a
+    href="/"
+    onClick={[Function]}
+  >
+    <img
+      src="logo-star-wars.png"
+    />
+  </a>
+</header>
+`;

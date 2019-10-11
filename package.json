@@ -9,6 +9,8 @@
     "@babel/register": "^7.0.0",
     "@emotion/core": "^10.0.21",
     "babel-plugin-dynamic-import-node": "^2.1.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.0",
     "ignore-styles": "^5.0.1",
     "isomorphic-fetch": "^2.2.1",
     "md5-file": "^4.0.0",
@@ -48,7 +50,8 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "devDependencies": {
-    "cross-env": "^6.0.3"
+    "cross-env": "^6.0.3",
+    "react-test-renderer": "^16.10.2"
   },
   "author": "",
   "license": "ISC"

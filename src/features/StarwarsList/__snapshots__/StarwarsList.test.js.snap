@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StarwarsList renders a snapshot 1`] = `
+<section
+  className="css-1rt94nh-Table"
+>
+  <table>
+    <thead>
+      <tr>
+        <th
+          style={
+            Object {
+              "width": "40%",
+            }
+          }
+        >
+          <div>
+            Name
+          </div>
+        </th>
+        <th
+          style={
+            Object {
+              "width": "20%",
+            }
+          }
+        >
+          <div>
+            Birth Year
+          </div>
+        </th>
+        <th
+          style={
+            Object {
+              "width": "20%",
+            }
+          }
+        >
+          <div>
+            Height
+          </div>
+        </th>
+        <th
+          style={
+            Object {
+              "width": "20%",
+            }
+          }
+        >
+          <div>
+            Mass
+          </div>
+        </th>
+      </tr>
+    </thead>
+  </table>
+  <div
+    className="css-1mzwwa2-Table"
+    onScroll={[Function]}
+  >
+    <table>
+      <tbody />
+    </table>
+  </div>
+</section>
+`;
